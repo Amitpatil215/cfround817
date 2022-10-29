@@ -1,0 +1,165 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define int long long int
+#define double long double
+#define test int tttt; cin>>tttt; while(tttt--)
+#define mod 1000000007    
+#define mod1 998244353
+#define pb push_back
+#define vi vector<int>
+#define vpi vector<pair<int, int> >
+#define vppi vector<pair<int, pair<int, int> > >
+#define yes cout<<"YES"<<"\n"
+#define no cout<<"NO"<<"\n"
+#define line cout<<"\n"
+#define all(x) x.begin(), x.end()
+      
+//////////////////////////////////////////////////////////////////////
+
+
+void messigoat(){ 
+#ifndef ONLINE_JUDGE 
+   freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout); 
+#endif
+}
+clock_t time_p=clock();
+void rtime(){ time_p=clock()-time_p; cerr<<"Time Taken : "<<(float)(time_p)/CLOCKS_PER_SEC<<"\n";}
+void messiforever() {ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);}
+int gcd(int a, int b){if(b==0)return a;return gcd(b,a%b);}
+bool prime(int n){for(int i=2;i*i<=n;i++){if(n%i==0)return false;}return true;}
+long long binexpm(long long a, long long b, long long m) {a %= m;long long res = 1;while (b > 0) {if (b & 1)res = res * a % m;a = a * a % m;b >>= 1;}return res;}
+long long binexp(long long a, long long b) {long long res = 1;while (b > 0) {if (b & 1)res = res * a;a = a * a;b >>= 1;}return res;}
+void arrin(int arr[], int n){for(int i=1;i<=n;i++)cin>>arr[i];}
+int divide(int a, int b, int md) {int rr=a*(binexpm(b, md-2, md));rr%=md;return rr;}
+
+//////////////////////////////////////////////////////////////////////
+      //******* MESSI is the G.O.A.T. *******//
+/*    
+⠀⠀⠀⠀⣠⡤⠒⠂⢀⣈⣉⠉⠑⠒⠢⠤⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⡰⠉⢁⣰⣶⣾⣿⣿⣿⣿⣷⣶⣼⣶⣼⣆⠀⠀⠀⠀⠀⠀
+⠀⢠⣁⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⡀⠀⠀⠀
+⠀⣿#byFCA⠛⠉⠉⠁⠀⠈⠉⠉⠙⠻⣿⣿⣷⣿⡄⠀⠀
+⠀⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⣿⢱⠀⠀
+⠀⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣟⠂⡇⠀
+⠀⣿⣿⠀⢀⣤⣶⣶⣦⠀⠀⢠⣴⣿⣷⣶⡄⠀⠘⢿⣿⣧⡇⠀
+⢸⣿⡏⠀⠠⡶⢽⡶⠿⠃⠀⠘⢿⠿⠶⠟⠿⠂⠀⢸⣿⣿⡿⡀
+⡜⢿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠟⠋⠀ ⡇
+⢱⠈⠙⠀⠀⠀⠀⣠⢠⣤⣤⣤⣤⣤⡤⡀⠀⠀⠀⠀⠀⣤⠀⢰
+⢸⠀⢢⡄⠀⠀⠴⣧⣴⡶⢿⢿⣿⣿⣿⣾⣦⠀⡀⢠⣆⠀⠙⠸
+⢠⠀⠈⣷⣀⡀⠨⣿⢿⢋⣉⣉⣉⣙⡿⣿⡿⣠⣟⣾⡿⣤⡠⠂
+⠘⠦⠤⣿⣿⣷⣼⣿⠀⠉⠉⠉⠉⠉⠀⢸⣿⣿⣿⣿⣿⠁⠀⠀
+⠀⠀⠀⢸⢻⣿⣿⣿⣶⡀⠾⣦⣷⠔⢧⣾⣿⣿⣿⣿⢸⠀⠀⠀
+⠀⠀⢀⣾⠀⠉⣿⣿⣿⣧⣦⣻⣳⣶⣿⣿⣿⣾⣿⡿⢸⠀⠀⠀
+⠀⢀⣿⣿⡀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⢸⣧⠀⠀
+⠀⢸⣿⣿⣇⠀⠈⠿⢿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠀⠀⣿⣿⡆⠀
+⠀⠈⢿⣿⣿⡄⠀⠀⠀⠉⠛⠛⠛⠛⠉⠁⠀⠀⠀⠀⣿⣿⣇⠀
+⠀⠀⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⠀
+⠀⠀⠀⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⡇⠀
+⠀⠀⠀⠘⢿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⠟⠁⠀
+⠀⠀⠀⠀⠀⠙⠿⢿⣿⣿⣶⣄⡀⠀⠀⠀⠀⣰⣿⣿⠋⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣦⠀⠀⠀⣿⣿⠃⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣷⣤⣺⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿⠿⠋⠀⠀⠀⠀
+⠀⠀
+       LIONEL MESSI
+*/       
+//////////////////////////////////////////////////////////////////////
+
+
+
+signed main()
+{  
+   messiforever(); messigoat();
+   
+   test
+   {
+      int n; cin>>n;
+      string s; cin>>s;
+      int m=(n-1)/2;
+      char arr[n];
+      for(int i=0;i<n;i++)
+      {
+         if(i<=m)
+            arr[i]='R';
+         else
+            arr[i]='L';
+      }
+
+      int ans=0;
+      for(int i=0;i<n;i++)
+      {
+         if(s[i]=='L')
+            ans+=i;
+         else
+            ans+=(n-1-i);
+      }
+
+      int l=0, r=n-1;
+      int f=1;
+      vi ind;
+      while(l<=r)
+      {
+         if(f)
+         {
+            if(s[l]!=arr[l])
+            {
+               ind.pb(l);
+            }
+            f^=1;
+            l++;
+         }
+         else
+         {
+            if(s[r]!=arr[r])
+            {
+               ind.pb(r);
+            }
+            r--;
+            f^=1;
+         }
+      }
+      // for(int i=0;i<n;i++)
+      //    cout<<arr[i]<<" ";
+      // line;
+     //  for(auto i: ind)
+     //  {
+     //     cout<<i<<" ";
+     //  }
+     //  line;
+     // line;
+     //cout<<ans<<"\n";
+      for(int i=0;i<n;i++)
+      {  
+
+         if(i>=(int)ind.size())
+         {
+            cout<<ans<<" ";
+         }
+         else
+         {  
+            
+            if(s[ind[i]]=='L')
+            {
+               ans-=ind[i];
+               ans+=(n-1-ind[i]);
+            }
+            else
+            {
+               ans-=(n-1-ind[i]);
+               ans+=ind[i];
+            }
+            cout<<ans<<" ";
+         }
+      }
+      line;
+      
+
+
+   }
+   
+
+   return 0;
+      
+}
